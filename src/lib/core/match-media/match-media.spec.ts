@@ -122,7 +122,7 @@ describe('match-media-observable', () => {
     let current: MediaChange = new MediaChange();
     let bp = breakPoints.findByAlias('md')!;
     matchMedia.activate(bp.mediaQuery);
-    let subscription = mediaObserver.media$.subscribe((change: MediaChange) => {
+    let subscription = mediaObserver.asObservable().subscribe((change: MediaChange) => {
       current = change;
     });
 
@@ -132,7 +132,7 @@ describe('match-media-observable', () => {
 
   it('can observe the initial, default activation for mediaQuery == "all". ', () => {
     let current: MediaChange = new MediaChange();
-    let subscription = mediaObserver.media$.subscribe((change: MediaChange) => {
+    let subscription = mediaObserver.asObservable().subscribe((change: MediaChange) => {
       current = change;
     });
 
@@ -143,7 +143,7 @@ describe('match-media-observable', () => {
   it('can observe custom mediaQuery ranges', () => {
     let current: MediaChange = new MediaChange();
     let customQuery = 'screen and (min-width: 610px) and (max-width: 620px)';
-    let subscription = mediaObserver.media$.subscribe((change: MediaChange) => {
+    let subscription = mediaObserver.asObservable().subscribe((change: MediaChange) => {
       current = change;
     });
 
@@ -158,7 +158,7 @@ describe('match-media-observable', () => {
   it('can observe registered breakpoint activations', () => {
     let current: MediaChange = new MediaChange();
     let bp = breakPoints.findByAlias('md') !;
-    let subscription = mediaObserver.media$.subscribe((change: MediaChange) => {
+    let subscription = mediaObserver.asObservable().subscribe((change: MediaChange) => {
       current = change;
     });
 
@@ -179,7 +179,7 @@ describe('match-media-observable', () => {
     let deactivationCount = 0;
 
     mediaObserver.filterOverlaps = false;
-    let subscription = mediaObserver.media$.subscribe((change: MediaChange) => {
+    let subscription = mediaObserver.asObservable().subscribe((change: MediaChange) => {
       if (change.matches) {
         ++activationCount;
       } else {
